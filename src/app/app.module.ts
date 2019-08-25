@@ -3,35 +3,41 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-//用于修复图标不显示问题bugfix
+import {CommonModule} from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-// antd
-// import { IconDefinition } from '@ant-design/icons-angular';
-// import { NgZorroAntdModule, NZ_ICON_DEFAULT_TWOTONE_COLOR, NZ_ICONS,NZ_I18N, zh_CN} from 'ng-zorro-antd';
-// 引入你需要的图标，比如你需要 fill 主题的 AccountBook Alert 和 outline 主题的 Alert，推荐 ✔️
-// import { AccountBookFill, AlertFill, AlertOutline } from '@ant-design/icons-angular/icons';
-// const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill ];
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TestComponent } from './test/test.component';
+import {User } from "./user/user.component";
+import {Layout} from "./layout/layout.component";
+import {Login} from "./login/login.component";
+import { from } from 'rxjs';
+import {HttpService} from "./services/http-service";
+//装饰器 @ngModule接收一个元数据对象，告诉angular如何编译和启动应用
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    User,
+    Layout,
+    Login,
+    TestComponent//配置当前项目运行的组件
   ],
-  imports: [
+  imports: [//配置当前模块运行的依赖的其它模块
     BrowserModule,
+    CommonModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    // NgZorroAntdModule.forRoot()
+    NgZorroAntdModule
   ],
   providers   : [
-    // { provide: NZ_ICON_DEFAULT_TWOTONE_COLOR, useValue: '#00ff00' }, // 不提供的话，即为 Ant Design 的主题蓝色
-    // { provide: NZ_ICONS, useValue: icons },
-    // { provide: NZ_I18N, useValue: zh_CN }
-  ],
-  bootstrap: [AppComponent]
+    { provide: NZ_I18N, useValue: zh_CN },
+    HttpService
+  ],//配置项目所需的服务
+  bootstrap: [AppComponent]//指定应用的主视图（根组件），通过引导appModule来启动应用
 })
 export class AppModule {}
