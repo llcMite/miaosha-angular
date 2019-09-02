@@ -1,14 +1,63 @@
 <section class="wrap">
   <article class="content">
     <div class="leftBar">
-      <ul>
-        <li><a routerLink="/admin/user">用户管理</a></li>
-        <li><a routerLink="/admin">商品管理</a></li>
-        <li><a routerLink="/admin">商品抢购</a></li>
+      <div class="home">
+        <i class="radius"></i>
+        <span>Mite Admin</span>
+      </div>
+      <ul class="leftBarBox">
+        <li>
+          <a routerLink="/admin/user">
+            <i nz-icon nzType="setting" nzTheme="outline"></i>用户管理</a>
+          <i nz-icon nzType="right" nzTheme="outline" (click)='isShowLeftChildF()'></i>
+          <div *ngIf="isShowLeftChild">
+            <p>option1</p>
+            <p>option1</p>
+            <p>option1</p>
+          </div>
+        </li>
+        <li><a routerLink="/admin">
+          <i nz-icon nzType="setting" nzTheme="outline"></i>商品管理</a>
+          <i nz-icon nzType="right" nzTheme="outline"></i>
+        </li>
+        <li><a routerLink="/admin">
+          <i nz-icon nzType="shopping-cart" nzTheme="outline"></i>商品抢购</a>
+          <i nz-icon nzType="right" nzTheme="outline"></i>
+        </li>
       </ul>
+     
+    
     </div>
     <div class="rightBar">
-      <header class="header"></header>
+      <header class="header">
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+          <input type="text" nz-input placeholder="input search text" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+          <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+        </ng-template>
+        <div class="icons-list">
+          <div class="icons-left">
+          <i  nz-icon nzType="bell" nzTheme="outline"></i>
+          <i  nz-icon nzType="mail" nzTheme="outline"></i>
+        </div>
+          <div class="line"></div>
+          <div class="icons-right">
+          <span>wxlMite</span>
+          <i (click)="isShowMenuF() " class="radius"></i>
+        </div>
+        </div>
+      </header>
+      <ul *ngIf="isShowMenu" class="header-menu">
+           <li><a><i nz-icon nzType="user" nzTheme="outline"></i>profile</a></li>
+           <li><a><i nz-icon nzType="setting" nzTheme="outline"></i>setting</a></li>
+           <li><a><i nz-icon nzType="unordered-list" nzTheme="outline"></i>activeLog</a></li>
+           <p></p>
+           <li (click)="loginOut()">
+              <a><i nz-icon nzType="close-circle" nzTheme="outline">
+
+           </i>loginOut</a></li>
+      </ul>
       <div class="router-box">
           <router-outlet></router-outlet>
       </div>
