@@ -15,6 +15,7 @@ import {Layout} from "./layout/layout.component";
 import {Login} from "./login/login.component";
 import { from } from 'rxjs';
 import {HttpService} from "./services/http-service";
+import { SearchSelectComponent } from './user/search-select/search-select.component';
 //装饰器 @ngModule接收一个元数据对象，告诉angular如何编译和启动应用
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {HttpService} from "./services/http-service";
     User,
     Layout,
     Login,
-    TestComponent//配置当前项目运行的组件
+    TestComponent,
+    SearchSelectComponent//配置当前项目运行的组件
   ],
   imports: [//配置当前模块运行的依赖的其它模块
     BrowserModule,

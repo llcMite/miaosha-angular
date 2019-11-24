@@ -32,6 +32,7 @@ export class Login{
          let res=rsp._body ? JSON.parse(rsp._body) :{};
          if(res.status=="success"){
             localStorage.setItem("ISLOGIN","TRUE");
+            localStorage.setItem("USER",this.user);
             this.message.info("登入成功");
             this.router.navigate(['/admin/user']);
          }else{

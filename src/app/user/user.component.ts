@@ -11,16 +11,17 @@ import { TestBed } from '@angular/core/testing';
 })
 @Injectable()
 export class User {
-  public userList:any[];
-  @ViewChild("appTest") Test:any;
-  constructor(private http:HttpClient){
-    
+  private data:object={};
+  private password:string='';
+  private schoolList:Array<any>=[];
+  constructor(){
+    this.data={
+      "username":"",
+      "school":""
+    };
+    for(let i=0; i<100; i++){
+      this.schoolList.push({label:"北京"+i,value:"北京"+i});
+    }
   }
-  ngOnInit(): void {
 
-  }
-  getChildMsg(){
-    alert(this.Test.msg);
-  }
-  public title:string = 'user';
 }

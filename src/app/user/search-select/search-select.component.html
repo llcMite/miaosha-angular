@@ -1,0 +1,8 @@
+<div>
+  <input type="text" [(ngModel)]="selectValue" (focus)="showSelectList()" >
+
+  <ul *ngIf="isShow">
+    {{selectValue}}
+    <li *ngFor="let item of selectList" (click)="selectItem(item.value)">{{item.label}}</li>
+  </ul>
+</div>
