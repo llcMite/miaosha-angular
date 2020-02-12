@@ -4,7 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import {User} from "./user/user.component"; 
 import {Layout} from "./layout/layout.component";
-import {Login} from "./login/login.component"
+import {Login} from "./login/login.component";
+import {ManagementComponent} from "./store/management/management.component";
+import {ShoppingComponent} from "./store/shopping/shopping.component";
+
 
 const routes: Routes = [
   { path: 'login', component: Login },
@@ -19,7 +22,15 @@ const routes: Routes = [
       {
         path:"user",
         component:User
-      }
+      },
+      {
+        path:"store-management",
+        component:ManagementComponent
+      },
+      {
+        path:"shopping",
+        component:ShoppingComponent
+      },
     ] 
   },
   {

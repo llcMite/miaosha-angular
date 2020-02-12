@@ -19,3 +19,34 @@ a{
     height: 100px;
     background:red;
 }
+
+//公共样式
+.common-search-box{
+    margin:10px 0;
+}
+.common-search-item{
+    display: flex!important;
+    flex-direction: row;
+    >label{
+        width:100px;
+        line-height: 32px;
+        flex-grow:0;
+        text-align: right;
+        margin-right:5px;
+    }
+    >div{
+        flex-grow:1;
+    }
+}
+.search-btn,.reset-btn{
+    margin-left:15px;
+}
+.common-tool-box{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    padding:10px 0;
+    .tool-box>button{
+        margin-right:10px;
+    }
+}

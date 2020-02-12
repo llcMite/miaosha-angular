@@ -1,0 +1,64 @@
+ <article class="wrap p1">
+ <!-- 表格 -->
+ <nz-table #basicTable nzSize="middle" [nzData]="goodsData" *ngIf="!isShowDetail">
+    <thead>
+      <tr>
+        <th>商品ID</th>
+        <th>商品名称</th>
+        <th>商品价格</th>
+        <th>商品库存</th>
+        <th>秒杀价格</th>
+        <th>秒杀状态</th>
+        <th>秒杀开始时间</th>
+        <th>销量</th>
+        <th>描述</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data;let i=index;">
+        <td>{{ data.id }}</td>
+        <td>{{ data.title}}</td>
+        <td>{{ data.price }}</td>
+        <td>{{ data.stock }}</td>
+        <td>{{ data.promoPrice}}</td>
+        <td>{{ data.promoStatus }}</td>
+        <td>{{data.startDate}}</td>
+        <td>{{ data.sales }}</td>
+        <td>{{data.description}}</td>
+        <td class="operation">
+          <a (click)="detail(data.id)">详情</a>
+          <a>修改</a>
+          <a (click)="delete(i)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <section class="detail" *ngIf="isShowDetail">
+    <div class="detail-content">
+      <div class="detail-cart">
+        <p class="lable">商品名称</p>
+        <p class="detail">{{detailData.title}}</p>
+      </div>
+      <div class="detail-cart">
+          <p class="lable">商品名称</p>
+          <p class="detail">{{detailData.title}}</p>
+        </div>
+        <div class="detail-cart">
+            <p class="lable">商品名称</p>
+            <p class="detail">{{detailData.title}}</p>
+          </div>
+          <div class="detail-cart">
+              <p class="lable">商品名称</p>
+              <p class="detail">{{detailData.title}}</p>
+            </div>
+            <div class="detail-cart">
+                <p class="lable">商品名称</p>
+                <p class="detail">{{detailData.title}}</p>
+              </div>
+
+
+    </div>
+
+  </section>
+</article>

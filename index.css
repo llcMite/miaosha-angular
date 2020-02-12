@@ -3,3 +3,15 @@ div{
   height: 100px;
   background:red;
 }
+.fr{
+  float: right;
+}
+.fl{
+  float:left;
+}
+.p1{
+  padding:1rem;
+}
+.p2{
+  padding:2rem;
+}

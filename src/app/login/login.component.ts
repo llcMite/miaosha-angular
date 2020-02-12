@@ -31,6 +31,7 @@ export class Login{
       this.getUserService({telphone:this.user,password:this.password}).subscribe((rsp=>{
          let res=rsp._body ? JSON.parse(rsp._body) :{};
          if(res.status=="success"){
+            localStorage.setItem("USER",this.user);
             localStorage.setItem("ISLOGIN","TRUE");
             localStorage.setItem("USER",this.user);
             this.message.info("登入成功");

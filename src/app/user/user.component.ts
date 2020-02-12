@@ -1,8 +1,7 @@
 import { Component,Injectable,ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpService} from '../services/http-service';
 
-import { Config } from 'protractor';
-import { TestBed } from '@angular/core/testing';
+declare var AMap:any;
 
 @Component({
   selector: 'app-user',
@@ -11,17 +10,27 @@ import { TestBed } from '@angular/core/testing';
 })
 @Injectable()
 export class User {
-  private data:object={};
-  private password:string='';
-  private schoolList:Array<any>=[];
-  constructor(){
-    this.data={
-      "username":"",
-      "school":""
-    };
-    for(let i=0; i<100; i++){
-      this.schoolList.push({label:"北京"+i,value:"北京"+i});
-    }
+  listOfData:any=[];
+  constructor(private httpService:HttpService){
+    
   }
+  ngOnInit(){
+    this.getUserList();
+  }
+  getUserList(){
+    let self=this;
+    this.httpService.get({url:"/api/user/getUserList",callback(res){
+      if(res.status=='success'){
+        self.listOfData=res.data;
+      }
+    }})
+  }
+  // ngAfterViewInit(){
+  //   var map = new AMap.Map('container', {
+  //     zoom:11,//级别
+  //     center: [116.397428, 39.90923],//中心点坐标
+  //     viewMode:'3D'//使用3D视图
+  // });
+  // }
 
 }
