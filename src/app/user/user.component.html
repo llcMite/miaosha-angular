@@ -1,64 +1,69 @@
 <div class="userWrap">
-    <nz-breadcrumb>
-        <nz-breadcrumb-item>
-          <i nz-icon nzType="home"></i>
-        </nz-breadcrumb-item>
-        <nz-breadcrumb-item>
-          <a><span>用户管理</span></a>
-        </nz-breadcrumb-item>
-        
-      </nz-breadcrumb>
-      <!-- 查询栏 -->
+  <nz-breadcrumb>
+    <nz-breadcrumb-item>
+      <i nz-icon nzType="home"></i>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <a><span>用户管理</span></a>
+    </nz-breadcrumb-item>
+
+  </nz-breadcrumb>
+  <!-- 查询栏 -->
   <div nz-row class="common-search-box">
     <div nz-col nzSpan='6' class="common-search-item">
       <label for="">用户名:</label>
       <div>
-          <input nz-input placeholder="请输入用户名" [(ngModel)]="value" />
+        <input nz-input placeholder="请输入用户名" [(ngModel)]="searchParam.name" />
       </div>
     </div>
     <div nz-col nzSpan='6' class="common-search-item">
-        <label for="">账号:</label>
-        <div>
-            <input nz-input placeholder="请输入账号" [(ngModel)]="value" />
-        </div>
+      <label for="">手机号码:</label>
+      <div>
+        <input nz-input placeholder="请输入账号" [(ngModel)]="searchParam.telphone" />
+      </div>
     </div>
     <div nz-col nzSpan='6' class="common-search-item">
-        <button nz-button [nzSize]="default" class="search-btn" nzType="default">查询</button>
-        <button nz-button [nzSize]="default" class="reset-btn" nzType="default">重置</button>
+      <button nz-button [nzSize]="default" class="search-btn" nzType="default" (click)="onSearch()">查询</button>
+      <button nz-button [nzSize]="default" class="reset-btn" nzType="default">重置</button>
     </div>
-    
+
   </div>
-<!-- 工具栏 -->
+  <!-- 工具栏 -->
   <div class="common-tool-box">
     <div class="tool-box">
-        <button nz-button [nzSize]="default" nzType="default">新增</button>
-        <button nz-button [nzSize]="default" nzType="default">修改</button>
-        <button nz-button [nzSize]="default" nzType="default">删除</button>
+      <button nz-button [nzSize]="default" nzType="default">新增</button>
+      <button nz-button [nzSize]="default" nzType="default">修改</button>
+      <button nz-button [nzSize]="default" nzType="default">删除</button>
     </div>
     <div>
-      
+
     </div>
   </div>
   <!-- 表格 -->
-  <nz-table #basicTable nzSize="middle" [nzData]="listOfData">
-      <thead>
-        <tr>
-          <th>用户名</th>
-          <th>性别</th>
-          <th>年龄</th>
-          <th>注册方式</th>
-          <th>电话号码</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of basicTable.data">
-          <td>{{ data.name }}</td>
-          <td>{{ data.gender=='1'?'男':'女'}}</td>
-          <td>{{ data.age }}</td>
-          <td>{{data.registerMode}}</td>
-          <td>{{data.telphone}}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-    <!-- <div id="container" style="width:100px; height:100px"></div> -->
+  <nz-table #basicTable nzSize="middle" 
+  [nzData]="listOfData" [nzShowPagination]='true' [nzFrontPagination]='false' [nzShowSizeChanger]='true'
+    [nzTotal]='pageVo.total' [nzPageIndex]='pageVo.pageNo' [nzPageSize]='pageVo.pageSize'
+    (nzPageIndexChange)="changePageIndex($event)"   
+    (nzPageSizeChange)="changePageSize($event)"
+    >
+    <thead>
+      <tr>
+        <th>用户名</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>注册方式</th>
+        <th>电话号码</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.gender=='1'?'男':'女'}}</td>
+        <td>{{ data.age }}</td>
+        <td>{{data.registerMode}}</td>
+        <td>{{data.telphone}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+
 </div>

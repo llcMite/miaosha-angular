@@ -2,17 +2,40 @@
     <article class="login-box">
         <div class="left"></div>
         <div class="right">
-            <div>
-               <h5>用户登入</h5>
-               <div>
-                <input class="login-input" nz-input placeholder="用户名/手机" [(ngModel)]="user" />
-                <input class="login-input" [type]="'password'" nz-input placeholder="密码" [(ngModel)]="password" />
-               </div>
-                <button class="login-button blue" (click)="login()" nz-button nzType="primary" nzShape="round">登入</button>
+            <div *ngIf="isLoginPage">
+                <h5>用户登入</h5>
+                <div>
+                    <input class="login-input" nz-input placeholder="用户名/手机" [(ngModel)]="loginParam.user" />
+                    <input class="login-input" [type]="'password'" nz-input placeholder="密码" [(ngModel)]="loginParam.password" />
+                </div>
+                <button class="login-button blue" (click)="onLogin()" nz-button nzType="primary"
+                    nzShape="round">登入</button>
+            </div>
+            <div *ngIf="!isLoginPage">
+                <h5>用户注册</h5>
+                <div>
+                    <input class="login-input" nz-input placeholder="用户名" [(ngModel)]="registerParam.name" />
+                    <input class="login-input" [type]="'password'" nz-input placeholder="密码" [(ngModel)]="registerParam.password" />
+                    <div class="telphone-wrap">
+                            <input type="text" class="login-input" nz-input placeholder="手机号码" [(ngModel)]="registerParam.telphone" />
+                            <a (click)='getOptCode()'>获取手机验证码</a>
+                    </div>
+                    <input class="login-input" nz-input placeholder="年龄" [(ngModel)]="registerParam.age" />
+                    <nz-radio-group [(ngModel)]="gender">
+                        <label nz-radio nzValue="1">男</label>
+                        <label nz-radio nzValue="0">女</label>
+                    </nz-radio-group>
+                    <input class="login-input" nz-input placeholder="手机验证码" [(ngModel)]="registerParam.otpCode" />
+                </div>
+
+                <button class="login-button blue" (click)="onRegister()" nz-button nzType="primary"
+                    nzShape="round">注册</button>
             </div>
             <hr>
-            <button class="login-button red" nz-button nzType="primary"  nzShape="round">用户登入</button>
-            <button class="login-button strong-blue" nz-button nzType="primary"  nzShape="round">用户注册</button>
+            <button *ngIf="isLoginPage" (click)="isLoginPage=!isLoginPage" class="login-button red" nz-button nzType="primary"
+                nzShape="round">用户登入</button>
+            <button *ngIf="!isLoginPage" (click)="isLoginPage=!isLoginPage" class="login-button red" nz-button nzType="primary"
+                nzShape="round">用户注册</button>
             <hr>
             <p class="forgot-password">
                 <a>忘记密码</a>

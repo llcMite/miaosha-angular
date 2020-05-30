@@ -1,36 +1,67 @@
-import { Component,Injectable,ViewChild } from '@angular/core';
-import {HttpService} from '../services/http-service';
+import { Component, Injectable, ViewChild, OnInit} from '@angular/core';
+import { HttpService } from '../services/http-service';
+import request from './../services/ajax.service';
 
-declare var AMap:any;
+declare var AMap: any;
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.less']
 })
-@Injectable()
-export class User {
-  listOfData:any=[];
-  constructor(private httpService:HttpService){
-    
+export class UserComponent implements OnInit {
+  listOfData: any = [];
+  searchParam={
+    name:'',
+    telphone:''
   }
-  ngOnInit(){
+  pageVo: any = {
+    pageNo: 1,
+    pageSize: 10,
+    total: 0
+  }
+
+  constructor(private httpService: HttpService) {
+
+  }
+
+  ngOnInit() {
     this.getUserList();
   }
-  getUserList(){
-    let self=this;
-    this.httpService.get({url:"/api/user/getUserList",callback(res){
-      if(res.status=='success'){
-        self.listOfData=res.data;
-      }
-    }})
-  }
-  // ngAfterViewInit(){
-  //   var map = new AMap.Map('container', {
-  //     zoom:11,//级别
-  //     center: [116.397428, 39.90923],//中心点坐标
-  //     viewMode:'3D'//使用3D视图
-  // });
-  // }
 
+  getUserList() {
+    let self = this;
+    let {pageNo,pageSize}=this.pageVo;
+    let requestParam={
+      ...this.searchParam,
+      pageSize:pageSize,
+      pageNo:pageNo
+    }
+    this.httpService.get({
+      url: "/api/user/getUserList", 
+      body:requestParam,
+      callback(res) {
+        if (res.status === 'success') {
+          let pageObject = res.data;
+          self.listOfData = pageObject.dataList;
+          self.pageVo.pageNo = pageObject.pageNo;
+          self.pageVo.pageSize = pageObject.pageSize;
+          self.pageVo.total = pageObject.total;
+        }
+      }
+    })
+  }
+
+  changePageIndex(pageNo ) {
+    this.pageVo.pageNo = pageNo;
+    this.getUserList();
+  }
+   changePageSize(pageSize) {
+    this.pageVo.pageSize = pageSize;
+    this.getUserList();
+  }
+
+  onSearch() {
+    this.getUserList()
+  }
 }

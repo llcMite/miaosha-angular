@@ -10,7 +10,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TestComponent } from './test/test.component';
-import {User } from "./user/user.component";
+import {UserComponent } from "./user/user.component";
 import {Layout} from "./layout/layout.component";
 import {Login} from "./login/login.component";
 import { from } from 'rxjs';
@@ -22,7 +22,7 @@ import { ManagementComponent } from './store/management/management.component';
 @NgModule({
   declarations: [
     AppComponent,
-    User,
+    UserComponent,
     Layout,
     Login,
     TestComponent,

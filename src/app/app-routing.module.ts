@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-import {User} from "./user/user.component"; 
+import {UserComponent} from "./user/user.component"; 
 import {Layout} from "./layout/layout.component";
 import {Login} from "./login/login.component";
 import {ManagementComponent} from "./store/management/management.component";
@@ -17,11 +17,11 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        component:User
+        component:UserComponent
       },
       {
         path:"user",
-        component:User
+        component:UserComponent
       },
       {
         path:"store-management",
