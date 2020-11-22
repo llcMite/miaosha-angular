@@ -1,0 +1,34 @@
+<nz-modal [(nzVisible)]="dialogConfig.visible" [nzTitle]="dialogConfig.title" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <form #customForm nz-form [formGroup]="dialogConfig.validateForm">
+    <nz-form-item *ngFor="let item of dialogConfig.formItems">
+      <ng-container *ngIf="item.type == 'input'">
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired [nzFor]="item.key">{{
+          item.name
+          }}</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input nz-input [formControlName]="item.key" [id]="item.key" />
+          <nz-form-explain *ngIf="
+          dialogConfig.validateForm.get(item.key)?.dirty &&
+          dialogConfig.validateForm.get(item.key)?.errors
+              ">
+            {{ item.errorMsg }}
+          </nz-form-explain>
+        </nz-form-control>
+      </ng-container>
+      <ng-container *ngIf="item.type == 'password'">
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired [nzFor]="item.key">{{
+          item.name
+          }}</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input type="password" nz-input [formControlName]="item.key" [id]="item.key" />
+          <nz-form-explain *ngIf="
+          dialogConfig.validateForm.get(item.key)?.dirty &&
+          dialogConfig.validateForm.get(item.key)?.errors
+              ">
+            {{ item.errorMsg }}
+          </nz-form-explain>
+        </nz-form-control>
+      </ng-container>
+    </nz-form-item>
+  </form>
+</nz-modal>

@@ -1,0 +1,77 @@
+<div class="userWrap">
+  <nz-breadcrumb>
+    <nz-breadcrumb-item>
+      <i nz-icon nzType="home"></i>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <a><span>用户管理</span></a>
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+  <!-- 查询栏 -->
+  <div nz-row class="common-search-box">
+    <div nz-col nzSpan="6" class="common-search-item">
+      <label for="">用户名:</label>
+      <div>
+        <input nz-input placeholder="请输入用户名" [(ngModel)]="searchParam.name" />
+      </div>
+    </div>
+    <div nz-col nzSpan="6" class="common-search-item">
+      <label for="">手机号码:</label>
+      <div>
+        <input nz-input placeholder="请输入账号" [(ngModel)]="searchParam.telphone" />
+      </div>
+    </div>
+    <div nz-col nzSpan="6" class="common-search-item">
+      <button nz-button nzType="primary" [nzSize]="default" class="search-btn" (click)="onSearch()">
+        <i nz-icon type="search"></i>
+        查询
+      </button>
+      <button nz-button [nzSize]="default" class="reset-btn" nzType="primary" nzGhost>
+        <i nz-icon type="undo"></i>
+        重置
+      </button>
+    </div>
+  </div>
+  <!-- 工具栏 -->
+  <div class="common-tool-box">
+    <div class="tool-box">
+      <!-- <button nz-button [nzSize]="default" nzType="default" (click)="add()">
+        新增
+      </button>
+      <button nz-button [nzSize]="default" nzType="default" (click)="edit()">
+        修改
+      </button> -->
+      <!-- <button nz-button [nzSize]="default" nzType="default" (click)="delete()">
+        删除
+      </button> -->
+    </div>
+    <div></div>
+  </div>
+  <!-- 表格 -->
+  <nz-table #basicTable nzSize="middle" [nzData]="listOfData" [nzShowPagination]="true" [nzFrontPagination]="false"
+    [nzShowSizeChanger]="true" [nzTotal]="pageVo.total" [nzPageIndex]="pageVo.pageNo" [nzPageSize]="pageVo.pageSize"
+    (nzPageIndexChange)="changePageIndex($event)" (nzPageSizeChange)="changePageSize($event)">
+    <thead>
+      <tr>
+        <th>用户名</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>注册方式</th>
+        <th>电话号码</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.gender == "1" ? "男" : "女" }}</td>
+        <td>{{ data.age }}</td>
+        <td>{{ data.registerMode }}</td>
+        <td>{{ data.telphone }}</td>
+        <td> <a (click)='onDelete(data)'>删除</a></td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <form-dialog [dialogConfig]="dialogConfig"></form-dialog>
+</div>
